@@ -1,0 +1,32 @@
+<html>
+    <head>
+        <title>Food Ordering System</title>
+        <!-- CSS StyleSheet -->
+        <link rel = "stylesheet" type = "text/css" href ="stylesheet.css">
+        <!-- JavaScript -->
+        <script src="javascript.js"></script>
+    </head>
+    <body>
+        <div class="box">
+            <img src = "./image/avatar.png" class = "avatar">
+            <h1>Login Here</h1>
+            <form action="login.php" method="post">
+                <select name="role" id="roleSelection">
+                    <option>-- Login As --</option>
+                    <option value="Owner">Restaurant Owner</option>
+                    <option value="Admin">Restaurant Administrator</option>
+                    <option value="Manager">Restaurant Manager</option>
+                    <option value="Staff">Restaurant Staff</option>
+                    <option value="Customer">Customer</option>
+                </select><br><br>
+    
+                <p>Username: </p>
+                <input type = "text" name="username" id = "username" placeholder ="Enter Username">
+    
+                <p>Password: </p>
+                <input type = "password" name="password" id = "password" placeholder="Enter Password">
+                <input type = "submit" value = "Login"><br><br>
+            </form>
+        </div>
+    </body>
+</html>
