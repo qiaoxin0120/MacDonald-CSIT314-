@@ -1,64 +1,75 @@
 <?php 
-$Message = $ErrorUname = "";
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  $sqlRole = $_POST['role'];
-  $sqlUsername = $_POST['username'];
-  $sqlPassword = $_POST['password'];
+if (isset($_POST['submit'])) {
+  redirect();
+}
 
-  if ($ErrorUname!=""){
-    $Message = "Login failed! Errors found";
-  }
-  else{
-    include('conn.php');
+function validate() {
+  // Declare variables
+  $Message = "";
+  $ErrorUname = "";
 
-    $query=mysqli_query($conn,"select * from users where role = '$sqlRole' && username ='$sqlUsername' && password ='$sqlPassword'");
-    $num_rows=mysqli_num_rows($query);
-    $row=mysqli_fetch_array($query);
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Receive Data
+    $sqlRole = $_POST['role'];
+    $sqlUsername = $_POST['username'];
+    $sqlPassword = $_POST['password'];
 
-    if ($num_rows>0){
-      $Message = "Login Successful!";
+    // If Error occurred
+    if ($ErrorUname!=""){
+      $Message = "Login failed! Errors found";
     }
     else{
-      $Message = "Login Failed! User not found";
-    }
+      // Connect Database
+      include('conn.php');
 
-    
-    if ($Message=="Login Successful!"){
-      switch($sqlRole) {
-        case "Owner": {
-          header("Location:");
-          break;
-        }
+      $query=mysqli_query($conn,"select * from users where role = '$sqlRole' && username ='$sqlUsername' && password ='$sqlPassword'");
+      $num_rows=mysqli_num_rows($query);
+      $row=mysqli_fetch_array($query);
 
-        case "Admin": {
-          header("Location:");
-          break;
-        }
-
-        case "Manager": {
-          header("Location:");
-          break;
-        }
-
-        case "Staff": {
-          header("Location:");
-          break;
-        }
-
-        case "Customer": {
-          header("Location:");
-          break;
-        }
-
-        default:
-          header("Location:login.html");
+      // If there is valid data
+      if ($num_rows > 0){
+        return true;
+      }
+      else{
+        return false;
       }
     }
-    else {
-      echo $Message;
-      header("refresh:3;url=login.html");
+  }
+}
+    
+function redirect() {
+  $sqlRole = $_POST['role'];
+
+  if (validate() == true) {
+    switch($sqlRole) {
+      case "Owner": {
+        header("Location:Owner.html");
+        break;
+      }
+      case "Admin": {
+        header("Location:Administrator.html");
+        break;
+      }
+      case "Manager": {
+        header("Location:Restaurant_Manager.html");
+        break;
+      }
+      case "Staff": {
+        header("Location:Restaurant_Staff.html");
+        break;
+      }
+      case "Customer": {
+        header("Location:Customer.html");
+        break;
+      }
+      default:
+        header("Location:login.html");
     }
+  }
+  else {
+    echo nl2br ("<h1>Login Failed. \nRedirecting to Login Page...</h2>");
+    header("refresh:2;url=login.html");
   }
 }
 ?>
