@@ -8,6 +8,9 @@ function validate() {
   // Declare variables
   $Message = "";
   $ErrorUname = "";
+  $sqlRole = "";
+  $sqlUsername = "";
+  $sqlPassword = "";
 
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Receive Data
@@ -68,7 +71,7 @@ function redirect() {
     }
   }
   else {
-    echo nl2br ("<h1>Login Failed. \nRedirecting to Login Page...</h2>");
+    echo nl2br ("<h2 style='top:50%; left:50%;'>Login Failed. \nRedirecting to Login Page...</h2>");
     header("refresh:2;url=login.html");
   }
 }
