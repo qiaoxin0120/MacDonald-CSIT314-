@@ -1,8 +1,19 @@
 <?php 
 // Run when submit (Main Function)
 if (isset($_POST['submit'])) {
-  $main = new LoginController();
-  $main->redirect();
+
+  $sqlRole = $_POST['role'];
+  $sqlUsername = $_POST['username'];
+  $sqlPassword = $_POST['password'];
+
+  // Create an instance
+  $login = new LoginController();
+
+  // Validate the login
+  $result = $login -> validate($sqlRole, $sqlUsername, $sqlPassword);
+
+  // Display the following pages
+  $login -> redirect($result, $sqlRole);
 }
 
 class LoginController {
@@ -30,13 +41,8 @@ class LoginController {
   }
 
   // Redirect Page
-  public function redirect() {
-    $sqlRole = $_POST['role'];
-    $sqlUsername = $_POST['username'];
-    $sqlPassword = $_POST['password'];
-
-    // Call validate function
-    if ($this->validate($sqlRole, $sqlUsername, $sqlPassword) == true) {
+  public function redirect($result, $sqlRole) {
+    if ($result== true) {
       switch($sqlRole) {
         case "Owner": {
           header("Location:Owner.html");
@@ -63,9 +69,8 @@ class LoginController {
       }
     }
     else {
-      echo nl2br ("<h2>Login Failed. \nRedirecting to Login Page...</h2>");
+      echo nl2br ("<h1 style='position:fixed; top:50%; left: 50%; transform: translate(-50%, -50%); width: auto; color:red';>Login Failed. \nRedirecting to Login Page...</h1>");
       header("refresh:2;url=login.html");
     }
   }
 }
-?>
