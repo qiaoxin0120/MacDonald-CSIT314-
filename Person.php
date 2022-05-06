@@ -51,6 +51,10 @@ class Person {
     function set_isActivate($isActivate) {
         $this->isActivate = $isActivate;
     }
+    
+    function get_id() {
+        return $this->id;
+    }
 
     function get_username() {
         return $this->username;
