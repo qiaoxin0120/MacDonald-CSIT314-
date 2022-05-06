@@ -69,7 +69,8 @@ class LoginController {
       }
     }
     else {
-      echo nl2br ("<h1 style='position:fixed; top:50%; left: 50%; transform: translate(-50%, -50%); width: auto; color:red';>Login Failed. \nRedirecting to Login Page...</h1>");
+      echo nl2br ("<h1 style='position:fixed; top:50%; left: 50%; transform: translate(-50%, -50%); width: auto; color:red';>
+                   Login Failed. \nRedirecting to Login Page...</h1>");
       header("refresh:2;url=login.html");
     }
   }
