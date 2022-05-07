@@ -35,7 +35,7 @@ class LoginController {
 
   // Validate Information with database
   public function validate($sqlRole, $sqlUsername, $sqlPassword) {
-    include('Person_class.php');
+    include('Person.php');
     $query= new Person();
     return $query -> validation($sqlRole,$sqlUsername,$sqlPassword);
   }
