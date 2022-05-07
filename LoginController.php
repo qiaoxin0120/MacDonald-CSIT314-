@@ -45,11 +45,11 @@ class LoginController {
     if ($result== true) {
       switch($sqlRole) {
         case "Owner": {
-          header("Location:Owner.html");
+          header("Location:RestaurantOwner.html");
           break;
         }
         case "Admin": {
-          header("Location:Administrator.html");
+          header("Location:Restaurant_Administrator.html");
           break;
         }
         case "Manager": {
@@ -60,18 +60,14 @@ class LoginController {
           header("Location:Restaurant_Staff.html");
           break;
         }
-        case "Customer": {
-          header("Location:Customer.html");
-          break;
-        }
         default:
-          header("Location:login.html");
+          header("Location:Login.html");
       }
     }
     else {
       echo nl2br ("<h1 style='position:fixed; top:50%; left: 50%; transform: translate(-50%, -50%); width: auto; color:red';>
                    Login Failed. \nRedirecting to Login Page...</h1>");
-      header("refresh:2;url=login.html");
+      header("refresh:2;url=Login.html");
     }
   }
 }
