@@ -45,7 +45,7 @@ class LoginController {
     if ($result== true) {
       switch($sqlRole) {
         case "Owner": {
-          header("Location:RestaurantOwner.html");
+          header("Location:Restaurant_Owner.html");
           break;
         }
         case "Admin": {
