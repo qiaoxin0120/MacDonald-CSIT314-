@@ -1,20 +1,18 @@
-<?php
-     private $logout
-        
-     // Create an instance
-     $logout = new LogoutController();
+<?php  
+    // Create an instance
+    $Logout = new LogoutController();
 
-     // Call the logout function
-     $logout -> logout();
+    // Call the logout function
+    $Logout -> logout();
 
     class LogoutController
     {
-        function logout() 
+        public function logout() 
         {
             session_start();
             unset($_SESSION['username']);
             unset($_SESSION['password']);
-            header("Location:login.html");
+            header("Location:Login.html");
         }
     }
 ?>
