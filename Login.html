@@ -2,12 +2,12 @@
     <head>
         <title>Food Ordering System</title>
         <!-- CSS StyleSheet -->
-        <link rel = "stylesheet" type = "text/css" href ="stylesheet.css">
+        <link rel = "stylesheet" type = "text/css" href ="login.css">
     </head>
-    <body>
+    <body style = "background-image: url(image/Background.png);">
         <div class="box">
-            <img src = "./image/avatar.png" class = "avatar">
-            <h1>Login Here</h1>
+            <img src = "./image/avatar2.jpeg" class = "avatar">
+            <h2>LOGIN HERE</h2>
 
             <form action="LoginController.php" method="post">
                 <select name="role" id="roleSelection">
@@ -18,10 +18,10 @@
                     <option value="Staff">Restaurant Staff</option>
                 </select><br><br>
     
-                <p>Username: </p>
+                <p>Username: </p><br>
                 <input type = "text" name="username" id = "username" placeholder ="Enter Username">
     
-                <p>Password: </p>
+                <p>Password: </p><br>
                 <input type = "password" name="password" id = "password" placeholder="Enter Password">
                 <input type = "submit" value = "Login" name="submit"><br><br>
             </form>
