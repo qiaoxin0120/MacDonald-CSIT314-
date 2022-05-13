@@ -6,17 +6,19 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="">
+
+        <title> Restaurant Admin - Create Account / Account Profile</title>
     </head>
     <style>
         .logo img{
-			max-height: 70px;
+			    max-height: 70px;
       		max-width: 70 px;
-			margin-top: 0px;
-			display: block;
-  			margin-left: auto;
-  			margin-right: auto;
+			    margin-top: 0px;
+			    display: block;
+  			  margin-left: auto;
+  			  margin-right: auto;
       		object-fit: cover;
-		}
+		    }
         .title{ 
             font-size: 40px;
             color: white;
@@ -25,7 +27,11 @@
         .card-body a{
             border-radius: 5%;
             padding: 10px;
-            background-color: lightgrey;
+            background-color: rgb(218, 213, 213);
+            display: block;
+            width: 250px;
+            text-align: center;
+            text-decoration:none;
         }
     </style>
     <title>Restaurant Administrator</title>
@@ -44,9 +50,9 @@
      <body id="page-top">
 
         <!-- Navbar -->
-        <nav class="navbar navbar-expand navbar-dark bg-dark static-top" style = "height : 120x;">
+        <nav class="navbar navbar-expand navbar-dark bg-dark static-top" style = "height : 110px;">
     
-          <a class="title" href="Restaurant_Administrator.html">Break Fast</a>
+          <div class="title">Break First</div>
           <div class = "logo"><img src = "image/Logo Big.png"></div>
     
           <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
@@ -66,16 +72,24 @@
                 </a>
              </li>
 
+             <li class="nav-item">
+                <a class="nav-link" href=" ">
+                  <i class="fa fa-key fa-fw"></i>
+                  <span>Change Password</span>
+                </a>
+              </li>
+
               <li class="nav-item">
                 <a class="nav-link" href=" ">
-                  <i class="fas fa-fw fa-user-circle"></i>
+                  <i class="fa fa-id-badge" style = "padding-right: 7px;"></i>
                   <span>Manage User Account</span>
                 </a>
               </li>
+
       
               <li class="nav-item">
                 <a class="nav-link" >
-                  <i class="fas fa-fw fa-tachometer-alt"></i>
+                  <i class="fa fa-id-badge" style = "padding-right: 7px;"></i>
                   <span>Manage User Profile</span></a>
               </li>
           
@@ -110,9 +124,9 @@
                           <i class="fas fa-fw fa-user-circle"></i>
                           Click the button to create user account / user profile</div>
                         <div class="card-body">
-                          <a> Create User Account </a>
-                          <br><br>
-                          <a> Create User Profile </a>
+                          <a href="CreateAccountController.php"> Create User Account </a>
+                          <br>
+                          <a href="CreateAccProfileController.php"> Create User Profile </a>
                         </div>
                       </div>
                     </div>
