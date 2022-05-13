@@ -9,50 +9,39 @@ class Person {
     public $realname;
     public $isActivate;
 
-    function __constructor($id, $username, $password, $role, $phone, $email, $realname, $isActivate) {
-        $this->id = $id;
-        $this->username = $username;
-        $this->password = $password;
-        $this->role = $role;
-        $this->phone = $phone;
-        $this->email = $email;
-        $this->realname = $realname;
-        $this->isActivate = $isActivate;
-    }
-
-    function set_id($id) {
+    public function set_id($id) {
         $this->id = $id;
     }
 
-    function set_username($username) {
+    public function set_username($username) {
         $this->username = $username;
     }
 
-    function set_password($password) {
+    public function set_password($password) {
         $this->password = $password;
     }
 
-    function set_role($role) {
+    public function set_role($role) {
         $this->role = $role;
     }
 
-    function set_phone($phone) {
+    public function set_phone($phone) {
         $this->phone = $phone;
     }
 
-    function set_email($email) {
+    public function set_email($email) {
         $this->email = $email;
     }
 
-    function set_realname($realname) {
+    public function set_realname($realname) {
         $this->realname = $realname;
     }
 
-    function set_isActivate($isActivate) {
+    public function set_isActivate($isActivate) {
         $this->isActivate = $isActivate;
     }
     
-    function get_id() {
+    public function get_id() {
         return $this->id;
     }
 
@@ -60,35 +49,36 @@ class Person {
         return $this->username;
     }
 
-    function get_password() {
+    public function get_password() {
         return $this->password;
     }
 
-    function get_role() {
+    public function get_role() {
         return $this->role;
     }
 
-    function get_phone() {
+    public function get_phone() {
         return $this->phone;
     }
 
-    function get_email() {
+    public function get_email() {
         return $this->email;
     }
 
-    function get_realname() {
+    public function get_realname() {
         return $this->realname;
     }
 
-    function get_isActivate() {
+    public function get_isActivate() {
         return $this->isActivate;
     }
 
-    function validation($sqlRole, $sqlUsername, $sqlPassword) {
+    // validate log in
+    public function validation($sqlRole, $sqlUsername, $sqlPassword) {
         include 'conn.php';
-        $query=mysqli_query($conn,"select * from users where role = '$sqlRole' && username ='$sqlUsername' && password ='$sqlPassword' && isActivate ='Y'");
+
+        $query=mysqli_query($conn,"SELECT * FROM users WHERE role = '$sqlRole' && username ='$sqlUsername' && password ='$sqlPassword' && isActivate ='Y'");
         $num_rows=mysqli_num_rows($query);
-        $row=mysqli_fetch_array($query);
 
         // If there is valid data
         if ($num_rows > 0) {
@@ -98,5 +88,66 @@ class Person {
             return false;
         }
     }
+
+    public function createAccountProfile($curRole, $curUsername, $curPassword, $newRealName, $newPhone, $newEmail) {
+        include 'conn.php';
+
+        $this -> set_role($curRole);
+        $this -> set_username($curUsername);
+        $this -> set_password($curassword);
+        $this -> set_realname($newRealName);
+        $this -> set_phone($newPhone);
+        $this -> set_email($newEmail);
+
+        $sql = "UPDATE users SET realname = '$newRealName', phone = '$newPhone',email = '$newEmail' WHERE role = '$curRole' && username ='$curUsername' && password = '$curPassword' && isActivate ='Y'";
+        
+        if(mysqli_query($conn, $sql))
+        {
+            return true;
+        }
+        else{
+            echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
+            return false;
+        }
+    }
+
+    public function createAccount($newRole, $newUsername, $newPassword) {
+        include 'conn.php';
+
+        $this -> set_role($newRole);
+        $this -> set_username($newUsername);
+        $this -> set_password($newPassword);
+
+        $sql = "INSERT INTO users (role, username, password, isActivate) VALUES('$newRole','$newUsername','$newPassword', 'Y')";  
+
+        if(mysqli_query($conn, $sql))
+        {
+            return true;
+        }
+        else{
+            echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
+            return false;
+        }
+    }
+
+    public function isUserExist($newRole, $newUsername, $newPassword){
+        include 'conn.php';
+
+        $this -> set_role($newRole);
+        $this -> set_username($newUsername);
+        $this -> set_password($newPassword);
+
+        $qr = mysqli_query($conn, "SELECT * FROM users WHERE role = '$newRole' && username ='$newUsername' && password = '$newPassword' && isActivate ='Y'");  
+        $num_rows=mysqli_num_rows($qr);
+        $row=mysqli_fetch_array($qr);
+
+        // If there is an exist account
+        if ($num_rows > 0) {
+            return true;
+        }
+        else{
+            return false;
+        }
+    }  
 } 
 ?>
