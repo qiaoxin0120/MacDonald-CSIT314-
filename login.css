@@ -51,7 +51,7 @@ h2 {
     margin-bottom: 20px;
 }
 
-.box input[type="text"] , input[type="password"] {
+.box input[type="text"] , input[type="password"], input[type="tel"]{
     border: none;
     border-bottom: 1px solid rgb(0, 0, 0);
     background: transparent;
