@@ -12,7 +12,7 @@
             session_start();
             unset($_SESSION['username']);
             unset($_SESSION['password']);
-            header("Location:Login.html");
+            header("Location:homepage.html");
         }
     }
 ?>
