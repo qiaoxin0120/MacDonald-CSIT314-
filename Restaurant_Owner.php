@@ -114,7 +114,7 @@
                   <!-- Breadcrumbs-->
                   <ol class="breadcrumb">
                     <li class="breadcrumb-item">
-                      <a href="Restaurant_Administrator.html">Welcome Owner!</a>
+                      <a href="Restaurant_Owner.php">Welcome Owner!</a>
                     </li>
                     <li class="breadcrumb-item active">View Report</li>
                   </ol>
