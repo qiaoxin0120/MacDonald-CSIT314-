@@ -57,7 +57,7 @@
 }
 ?>
 <body style = "background-image: url(image/Background.png);">
-        <div class="box" style = "height: 800 px;">
+        <div class="box" style = "height: 820px;">
             <h2><u>VIEW ACCOUNT PROFILE</u></h2>
             <h4> You are currently viewing user with id <strong><?php $userid = $_GET['id']; echo $userid;?>.</strong></h4>
 
