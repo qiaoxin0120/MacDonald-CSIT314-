@@ -170,9 +170,9 @@
                                             <!-- Below is view method -->
                                             <td class="text-center"><a href = "ViewProfileController.php?id=<?php echo $user['id'];?>" class="btn btn-sm btn-success" >View</a></td>
                                             <!-- Below is suspend method -->
-                                            <td class="text-center"><a href="SuspendProfileController.phpid=<?php echo $user['id'];?>" class="btn btn-sm btn-danger">Suspend</a></td>
+                                            <td class="text-center"><a href="SuspendProfileController.php?id=<?php echo $user['id'];?>" class="btn btn-sm btn-danger">Suspend</a></td>
                                             <!-- Below is edit method -->
-                                            <td class="text-center"><a href="EditProfileController.phpid=<?php echo $user['id'];?>" class="btn btn-sm btn-primary">Edit</a></td>
+                                            <td class="text-center"><a href="EditProfileController.php?id=<?php echo $user['id'];?>" class="btn btn-sm btn-primary">Edit</a></td>
                                         </tr>
                                         <?php 
                                     }
