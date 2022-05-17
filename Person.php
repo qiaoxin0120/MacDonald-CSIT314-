@@ -187,5 +187,61 @@ class Person {
             return "No data found!";
         }
     }
+
+    public function suspendAccount($id)
+    {
+        include 'conn.php';
+
+        $this -> set_id($id);
+
+        $sql = "UPDATE users SET isActivate = 'N' WHERE id = '$id'";  
+
+        // for suspended user, set isActivate value to 'N'
+        if(mysqli_query($conn, $sql))
+        {
+            return true;
+        }
+        else{
+            echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
+            return false;
+        }
+
+    }
+
+    public function checkSuspend($id)
+    {
+        include 'conn.php';
+
+        $this -> set_id($id);
+
+        $qr = mysqli_query($conn, "SELECT * FROM users WHERE id = '$id' && isActivate ='N'");  
+        $num_rows=mysqli_num_rows($qr);
+
+        if($num_rows > 0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public function suspendProfile($id)
+    {
+        include 'conn.php';
+
+        $this -> set_id($id);
+
+        $sql = "UPDATE users SET isActivate = 'N' WHERE id = '$id'";  
+
+        // for suspended user, set isActivate value to 'N'
+        if(mysqli_query($conn, $sql))
+        {
+            return true;
+        }
+        else{
+            echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
+            return false;
+        }
+    }
 } 
 ?>
