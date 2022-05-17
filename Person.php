@@ -89,6 +89,26 @@ class Person {
         }
     }
 
+    public function isUserExist($newRole, $newUsername, $newPassword){
+        include 'conn.php';
+
+        $this -> set_role($newRole);
+        $this -> set_username($newUsername);
+        $this -> set_password($newPassword);
+
+        $qr = mysqli_query($conn, "SELECT * FROM users WHERE role = '$newRole' && username ='$newUsername' && password = '$newPassword' && isActivate ='Y'");  
+        $num_rows=mysqli_num_rows($qr);
+        $row=mysqli_fetch_array($qr);
+
+        // If there is an exist account
+        if ($num_rows > 0) {
+            return true;
+        }
+        else{
+            return false;
+        }
+    }  
+
     public function createAccountProfile($curRole, $curUsername, $curPassword, $newRealName, $newPhone, $newEmail) {
         include 'conn.php';
 
@@ -130,16 +150,16 @@ class Person {
         }
     }
 
-    public function isUserExist($newRole, $newUsername, $newPassword){
+
+    public function searchAccount($curRole, $curUsername){
         include 'conn.php';
 
-        $this -> set_role($newRole);
-        $this -> set_username($newUsername);
-        $this -> set_password($newPassword);
+        $this -> set_role($curRole);
+        $this -> set_username($curUsername);
 
-        $qr = mysqli_query($conn, "SELECT * FROM users WHERE role = '$newRole' && username ='$newUsername' && password = '$newPassword' && isActivate ='Y'");  
+        $qr = mysqli_query($conn, "SELECT * FROM users WHERE role = '$newRole' && username ='$newUsername' && isActivate ='Y'");  
         $num_rows=mysqli_num_rows($qr);
-        $row=mysqli_fetch_array($qr);
+        $row = mysqli_fetch_array($qr);
 
         // If there is an exist account
         if ($num_rows > 0) {
@@ -148,6 +168,24 @@ class Person {
         else{
             return false;
         }
-    }  
+    }
+
+    public function viewAccount($id)
+    {
+        include 'conn.php';
+
+        $this -> set_id($id);
+
+        $qr = mysqli_query($conn, "SELECT * FROM users WHERE id = '$id' && isActivate ='Y'");  
+        $num_rows=mysqli_num_rows($qr);
+        $row = mysqli_fetch_array($qr);
+
+        if($num_rows > 0){
+            return $row;
+        }
+        else{
+            return "No data found!";
+        }
+    }
 } 
 ?>
