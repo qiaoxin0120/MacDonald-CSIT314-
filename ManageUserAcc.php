@@ -169,11 +169,11 @@
                                             <td><?php echo $user['id']; ?></td>
                                             <td><?php echo $user['username']; ?></td>
                                             <!-- Below is view method -->
-                                            <td class="text-center"><a class="btn btn-sm btn-success" href = "ViewAccController.php?id=<?php echo $user['id'];?>">View</a></td>
+                                            <td class="text-center"><a href = "ViewAccController.php?id=<?php echo $user['id'];?>" class="btn btn-sm btn-success" >View</a></td>
                                             <!-- Below is suspend method -->
-                                            <td class="text-center"><a href="SuspendAccountController.php" class="btn btn-sm btn-danger">Suspend</a></td>
+                                            <td class="text-center"><a href="SuspendAccController.php?id=<?php echo $user['id'];?>" class="btn btn-sm btn-danger">Suspend</a></td>
                                             <!-- Below is edit method -->
-                                            <td class="text-center"><a href="EditAccountController.php" class="btn btn-sm btn-primary">Edit</a></td>
+                                            <td class="text-center"><a href="EditAccountController.php?id=<?php echo $user['id'];?>" class="btn btn-sm btn-primary">Edit</a></td>
                                         </tr>
                                         <?php 
                                     }
