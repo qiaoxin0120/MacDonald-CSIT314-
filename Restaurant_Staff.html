@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <!-- JQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>  
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script src="https://markcell.github.io/jquery-tabledit/assets/js/tabledit.min.js"></script>
+    </head>
+    <style>
+        .logo img{
+			max-height: 70px;
+      		max-width: 70 px;
+			margin-top: 0px;
+			display: block;
+  			margin-left: auto;
+  			margin-right: auto;
+      		object-fit: cover;
+		}
+        .title{ 
+            font-size: 40px;
+            color: white;
+            padding-right: 0.5cm;
+        }
+        .card-body a{
+            border-radius: 5%;
+            padding: 10px;
+            background-color: lightgrey;
+        }
+    </style>
+    <title>Restaurant Staff</title>
+     <!-- Core CSS-->
+     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+     <!-- Custom fonts for this template-->
+     <link href="font/css/all.min.css" rel="stylesheet" type="text/css">
+ 
+     <!-- Page level plugin CSS-->
+     <link href="bootstrap/css/Table.bootstrap4.css" rel="stylesheet">
+ 
+     <!-- Custom styles for this template-->
+     <link href="bootstrap/css/admin.css" rel="stylesheet">
+
+     <body id="page-top">
+
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand navbar-dark bg-dark static-top" style = "height : 120x;">
+    
+          <a class="title" href="Restaurant_Staff.html">Break Fast</a>
+          <div class = "logo"><img src = "image/Logo Big.png"></div>
+    
+          <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
+            <i class="fas fa-bars"></i>
+          </button>
+        </nav>
+
+        <div id="wrapper">
+            <!------------------ Sidebar ------------------->
+            <ul class="sidebar navbar-nav">
+
+              <li class="nav-item">
+                 <a class="nav-link" href="">
+                    <i class="fas fa-fw fa-user-circle"></i>
+                    <span>Search and View Order</span>
+                </a>
+              </li>
+
+             <li class="nav-item">
+                 <a class="nav-link" href="ManageOrder.html">
+                    <i class="fas fa-fw fa-user-circle"></i>
+                    <span>Create Order</span>
+                </a>
+             </li>
+              
+              <li class="nav-item">
+                <a class="nav-link" href="LogoutController.php">
+                  <i class="fas fa-fw fa-power-off"></i>
+                  <span>Logout</span>
+                </a>
+              </li>
+            </ul>
+
+            <div id="content-wrapper">
+
+                <div class="container-fluid">
+        
+                  <!-- Breadcrumbs-->
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                      <a href="Restaurant_Staff.html">Welcome Staff!</a>
+                    </li>
+                    <li class="breadcrumb-item active">Order List</li>
+                  </ol>
+        
+                  <!-- Page Content -->
+                  <h1>Order List</h1>
+                  <hr>
+                    <div class="form-group">
+				      		    <input type="text" name="search_column" id="search_column" class="form-control" placeholder="Search Table Number Here" />
+				      	    </div>
+                      <table id="sample_data" class="table table-bordered table-striped">
+                        <div id="user_collapse" class="">  
+                          <form method="post" id="user_form">  
+                               <label>Enter Quantity</label>  
+                               <input type="text" name="quantity" id="quantity" class="form-control" />  
+                               <div align="center">  
+                                    <input type="hidden" name="action" id="action" />  
+                                    <input type="hidden" name="order_id" id="order_id" />  
+                                    <input type="submit" name="button_action" id="button_action" class="btn btn-default" value="Update" />  
+                               </div>  
+                               <br />  
+                          </form>  
+                     </div>  
+                        <div class="table-responsive" id="order-history-table"></div>
+                      </table>
+                    </div>
+                <!-- /.container-fluid -->
+        
+                <!-- Sticky Footer -->
+                <footer class="sticky-footer">
+                  <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                      <span>Copyright © MacDonald 2022</span>
+                    </div>
+                  </div>
+                </footer>
+        
+              </div>
+              <!-- /.content-wrapper -->
+        
+         </div>
+        <!-- /#wrapper -->
+        
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+     </body>
+</html>
+
+<script>
+  $(document).ready(function(){
+
+    load_data(1);
+
+    function load_data(page, query = '')
+    {
+      $.ajax({
+        url:"StaffController.php",
+        method:"POST",
+        data:{page:page, query:query},
+        success:function(data)
+        {
+          $('#order-history-table').html(data);
+        }
+      });
+    }
+
+    $(document).on('click', '.page-link', function(){
+      var page = $(this).data('page_number');
+      var query = $('#search_column').val();
+      load_data(page, query);
+    });
+
+    $('#search_column').keyup(function(){
+      var query = $('#search_column').val();
+      load_data(1, query);
+    });
+    
+    $('#user_form').on('submit', function(event){  
+                event.preventDefault();  
+                var quantity = $('#quantity').val();  
+               
+                if(quantity != '')  
+                {  
+                     $.ajax({  
+                          url:"action.php",  
+                          method:'POST',  
+                          data:new FormData(this),  
+                          contentType:false,  
+                          processData:false,  
+                          success:function(data)  
+                          {  
+                               alert(data);  
+                               $('#user_form')[0].reset();  
+                               load_data();  
+                               $("#action").val("Update");  
+                               $('#button_action').val("Update");  
+                          }  
+                     }); 
+                }  
+                else  
+                {  
+                     alert("Field is required!");  
+                }  
+           });  
+
+    $(document).on('click', '.update', function(){  
+      var order_id = $(this).attr("id");  
+        var action = "Fetch Single Data";  
+          $.ajax({  
+              url:"action.php",  
+              method:"POST",  
+              data:{order_id:order_id, action:action},  
+              dataType:"json",  
+              success:function(data)  
+              {  
+                   $('.collapse').collapse("show");  
+                   $('#quantity').val(data.quantity);  
+                   $('#button_action').val("Update");  
+                   $('#action').val("Edit");  
+                   $('#order_id').val(order_id);  
+              }  
+                });  
+           });  
+  });
+</script> 
